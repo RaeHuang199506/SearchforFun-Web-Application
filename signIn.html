@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign In</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container card mt-5 pt-3 pb-4 bg-light col-md-4 offset-md-4 col-12" id="form">
+		<a class="navbar-brand" href="index.html">Home</a>
+		<h4 class="text-center">Sign In</h4>
+		<form>
+  			<div class="form-group">
+    			<label for="username">Username</label>
+    			<input type="text" class="form-control" id="username" placeholder="Enter username">
+  			</div>
+  			<div class="form-group">
+    			<label for="password1">Password</label>
+    			<input type="password" class="form-control" id="password1" placeholder="Password">
+  			</div>
+  			<div class="text-danger mt-0 pb-3" id="result"></div>
+  			<button type="button" class="btn btn-primary" id="signIn">SignIn</button>
+  			<span class="float-right pt-3">Doesn't have an account? <a href="signUp.html">Sign up here</a></span>
+		</form>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+
+		$("#signIn").click(function() {
+			$.get("/signIn?username=" + $("#username").val() + "&password=" + $("#password1").val(),
+			function(data, status) {
+				$("#result").text(data);
+				$("#signUpForm").trigger("reset");
+				if(data == "Sign in successfully.") {
+					window.location.href = "index.html";
+				}
+			});
+		});
+	</script>
+</body>
+</html>
