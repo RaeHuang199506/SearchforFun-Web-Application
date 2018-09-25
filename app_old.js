@@ -4,7 +4,7 @@ var fs = require('fs');
 var url = require('url');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var url = 'mongodb://localhost:27017/app';
+var url = '/*mongoDB url here*/';
 
 
 // Use connect method to connect to the server
@@ -24,7 +24,7 @@ http.createServer(function(req, res){
 	if(req.url.includes('keyword')) {
 		var options = {
 			hostname: 'maps.googleapis.com',
-			path: '/maps/api/place/nearbysearch/json' + (req.url.substring(1)) + '&key=AIzaSyDcPmk9sHYh8FEtMugUYbkk660CKC-4Rik',
+			path: '/maps/api/place/nearbysearch/json' + (req.url.substring(1)) + '&key=/*Google API Key here*/',
 			method: 'GET'
 		};
 		console.log(options.path);
@@ -44,7 +44,7 @@ http.createServer(function(req, res){
 		wait(900);
 		var options = {
 			hostname: 'maps.googleapis.com',
-			path: '/maps/api/place/nearbysearch/json' + (req.url.substring(1)) + '&key=AIzaSyDcPmk9sHYh8FEtMugUYbkk660CKC-4Rik',
+			path: '/maps/api/place/nearbysearch/json' + (req.url.substring(1)) + '&key=/*Google API Key here*/',
 		}
 		var currRequest = https.request(options,(response) => {
 			var currResults = "";
@@ -63,7 +63,7 @@ http.createServer(function(req, res){
 			hostname: 'api.yelp.com',
 			path: '/v3/businesses/matches/best' + (req.url.substring(1)),
 			headers: {
-				authorization: "Bearer pMwa0AjAJSy3BFQjyH27ZBlpv4VAvmiy9Jhrny737KsTjHhBhukcjeu3ONp3OdQL3SwkUCpL63UsxPXDV5UtjCpKNRTCaXPuQ7cDHsZcPT81VU-rFdHdzJx716LPWnYx"
+				authorization: "Bearer /*Yelp API Key here*/"
 			} 
 		}
 		var currRequest = https.request(options,(response) => {
@@ -81,7 +81,7 @@ http.createServer(function(req, res){
 						hostname: 'api.yelp.com',
 						path: '/v3/businesses/'+ JSON.parse(currResults).businesses[0].id +'/reviews',
 						headers: {
-							authorization: "Bearer pMwa0AjAJSy3BFQjyH27ZBlpv4VAvmiy9Jhrny737KsTjHhBhukcjeu3ONp3OdQL3SwkUCpL63UsxPXDV5UtjCpKNRTCaXPuQ7cDHsZcPT81VU-rFdHdzJx716LPWnYx"
+							authorization: "Bearer /*Yelp API Key here*/"
 						}
 					}
 					var currRequestNext = https.request(optionsNext,(responseNext) => {
