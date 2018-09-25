@@ -11,7 +11,7 @@ const cookieParser  = require('cookie-parser');
 
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
-const dburl = 'mongodb://localhost:27017/app';
+const dburl = '/*mongodb url here*/';
 
 // Use connect method to connect to the server
 MongoClient.connect(dburl, function(err, db) {
@@ -88,7 +88,7 @@ app.get('/signIn', (req, res) => {
 app.get('/generalSearch', (req, res) => {
 	var options = {
 		hostname: 'maps.googleapis.com',
-		path: '/maps/api/place/nearbysearch/json?' + decodeURIComponent(querystring.stringify(req.query)).replace(/\s/g, "+") + '&key=AIzaSyDcPmk9sHYh8FEtMugUYbkk660CKC-4Rik',
+		path: '/maps/api/place/nearbysearch/json?' + decodeURIComponent(querystring.stringify(req.query)).replace(/\s/g, "+") + '&key=/*Google API Key here*/',
 		method: 'GET'
 	};
 	console.log(querystring.stringify(req.query));
@@ -108,7 +108,7 @@ app.get('/generalSearch', (req, res) => {
 app.get('/detailSearch', (req, res) => {
 	var options = {
 		hostname: 'maps.googleapis.com',
-		path: '/maps/api/place/nearbysearch/json?' + decodeURIComponent(querystring.stringify(req.query)).replace(/\s/g, "+") + '&key=AIzaSyDcPmk9sHYh8FEtMugUYbkk660CKC-4Rik',
+		path: '/maps/api/place/nearbysearch/json?' + decodeURIComponent(querystring.stringify(req.query)).replace(/\s/g, "+") + '&key=/*Google API Key here*/',
 	}
 	var currRequest = https.request(options,(response) => {
 		var currResults = "";
@@ -127,7 +127,7 @@ app.get('/yelpSearch', (req, res) => {
 		hostname: 'api.yelp.com',
 		path: '/v3/businesses/matches/best?' + decodeURIComponent(querystring.stringify(req.query)).replace(/\s/g, "+"),
 		headers: {
-			authorization: "Bearer pMwa0AjAJSy3BFQjyH27ZBlpv4VAvmiy9Jhrny737KsTjHhBhukcjeu3ONp3OdQL3SwkUCpL63UsxPXDV5UtjCpKNRTCaXPuQ7cDHsZcPT81VU-rFdHdzJx716LPWnYx"
+			authorization: "Bearer /*Yelp API Key here*/"
 		} 
 	}
 	var currRequest = https.request(options,(response) => {
@@ -143,7 +143,7 @@ app.get('/yelpSearch', (req, res) => {
 					hostname: 'api.yelp.com',
 					path: '/v3/businesses/'+ JSON.parse(currResults).businesses[0].id +'/reviews',
 					headers: {
-						authorization: "Bearer pMwa0AjAJSy3BFQjyH27ZBlpv4VAvmiy9Jhrny737KsTjHhBhukcjeu3ONp3OdQL3SwkUCpL63UsxPXDV5UtjCpKNRTCaXPuQ7cDHsZcPT81VU-rFdHdzJx716LPWnYx"
+						authorization: "Bearer /*Yelp API Key here*/"
 					}
 				}
 				var currRequestNext = https.request(optionsNext,(responseNext) => {
